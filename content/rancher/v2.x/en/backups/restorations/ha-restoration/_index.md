@@ -57,7 +57,9 @@ Make a copy of your original `rancher-cluster.yml` file.
 cp rancher-cluster.yml rancher-cluster-restore.yml
 ```
 
-Modify the copy and make the following changes.
+> **Note:** For RKE v0.2.0+ also ensure you copy the `rancher-cluster.rkestate` to match the filename of the `rancher-cluster-restore.yml` copy: `cp rancher-cluster.rkestate rancher-cluster-restore.rkestate`.
+
+Modify `rancher-cluster-restore.yml` and make the following changes.
 
 * Remove or comment out entire the `addons:` section. The Rancher deployment and supporting configuration is already in the `etcd` database.
 * Change your `nodes:` section to point to the restore nodes.
@@ -110,8 +112,6 @@ _Available as of RKE v0.2.0_
 
 When restoring etcd from a snapshot located in an S3 compatible backend, the command needs the S3 information in order to connect to the S3 backend and retrieve the snapshot.
 
-> **Note:** Ensure your `cluster.rkestate` is present before starting the restore, as this contains your certificate data for the cluster.
-
 ```
 $ rke etcd snapshot-restore --config cluster.yml --name snapshot-name \
 --s3 --access-key S3_ACCESS_KEY --secret-key S3_SECRET_KEY \
@@ -140,8 +140,6 @@ S3 specific options are only available for RKE v0.2.0+.
 ### 5. Bring Up the Cluster
 
 Use RKE and bring up the cluster on the single "target node."
-
-> **Note:** For users running RKE v0.2.0+, ensure your `cluster.rkestate` is present before starting the restore, as this contains your certificate data for the cluster.
 
 ```
 rke up --config ./rancher-cluster-restore.yml
