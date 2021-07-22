@@ -56,7 +56,7 @@ If you plan on achieving high availability with embedded etcd, server nodes must
 
 | Protocol | Port | Source | Description
 |-----|-----|----------------|---|
-| TCP | 6443 | K3s agent nodes | Kubernetes API Server
+| TCP | 6443 | K3s server nodes | Kubernetes API Server
 | UDP | 8472 | K3s server and agent nodes | Required only for Flannel VXLAN
 | TCP | 10250 | K3s server and agent nodes | Kubelet metrics
 | TCP | 2379-2380 | K3s server nodes | Required only for HA with embedded etcd
